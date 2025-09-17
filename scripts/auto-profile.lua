@@ -35,7 +35,6 @@ local function detect_and_apply_profile()
 end
 
 -- Apply profile when file loads
-mp.register_event("file-loaded", detect_and_apply_profile)
-
--- Also check when video track changes
-mp.observe_property("video-params", "native", detect_and_apply_profile)
+mp.register_event("file-loaded", function()
+    mp.add_timeout(0.5, detect_and_apply_profile)
+end)
